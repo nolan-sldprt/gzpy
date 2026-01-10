@@ -49,4 +49,4 @@ If you use ```gzpy``` in your work, please cite it as below:
 
 ### Third-Party 3D Models
 
-Third-party 3D models are included as example data to demonstrate ```gzpy```'s capabilities. For information on their attributions and licensing, see [ATTRIBUTIONS.md](ATTRIBUTIONS.md).
+Third-party 3D models, that are not licensed under Apache-2.0, are included as example data to demonstrate ```gzpy```'s capabilities. For information on their attributions and licensing, see [ATTRIBUTIONS.md](ATTRIBUTIONS.md).
