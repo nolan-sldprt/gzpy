@@ -43,9 +43,9 @@ def repair_mesh(mesh: trimesh.Trimesh) -> trimesh.Trimesh:
     # repaired_mesh.fill_holes()
     repaired_mesh.process()
     # required_mesh = trimesh.Trimesh(*pymeshfix.clean_from_arrays(repaired_mesh.vertices, repaired_mesh.faces))
-    repaired_mesh.remove_degenerate_faces()
-    repaired_mesh.remove_duplicate_faces()
-    repaired_mesh.remove_unreferenced_vertices()
+    # repaired_mesh.remove_degenerate_faces()
+    # repaired_mesh.remove_duplicate_faces()
+    # repaired_mesh.remove_unreferenced_vertices()
 
 
     repaired_count_nan = np.sum(np.isnan(repaired_mesh.vertices))

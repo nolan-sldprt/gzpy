@@ -1,0 +1,36 @@
+# Blender 5.0.1 MTL File: 'boat_model.blend'
+# www.blender.org
+
+newmtl Material.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /C:/Users/charl/OneDrive/Desktop/work stuff/fishing game/boat/textures/blender/lambert1_BaseColor.png
+map_Ns /C:/Users/charl/OneDrive/Desktop/work stuff/fishing game/boat/textures/blender/lambert1_Roughness.png
+map_refl /C:/Users/charl/OneDrive/Desktop/work stuff/fishing game/boat/textures/blender/lambert1_Metallic.png
+map_Bump -bm 1.000000 /C:/Users/charl/OneDrive/Desktop/work stuff/fishing game/boat/textures/blender/lambert1_Normal.png
+
+newmtl Material.002
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /C:/Users/charl/OneDrive/Desktop/work stuff/fishing game/boat/textures/blender/Material_BaseColor.png
+map_Ns /C:/Users/charl/OneDrive/Desktop/work stuff/fishing game/boat/textures/blender/Material_Roughness.png
+map_refl /C:/Users/charl/OneDrive/Desktop/work stuff/fishing game/boat/textures/blender/Material_Metallic.png
+map_Bump -bm 1.000000 /C:/Users/charl/OneDrive/Desktop/work stuff/fishing game/boat/textures/blender/Material_Normal.png
+
+newmtl glass
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /C:/Users/charl/OneDrive/Desktop/work stuff/fishing game/boat/textures/blender/Material_Metallic.png
