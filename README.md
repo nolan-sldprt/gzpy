@@ -46,3 +46,7 @@ If you use ```gzpy``` in your work, please cite it as below:
     version = {0.1.0},
 }
 ```
+
+### Third-Party 3D Models
+
+Third-party 3D models are included as example data to demonstrate ```gzpy```'s capabilities. For information on their attributions and licensing, see [ATTRIBUTIONS.md](ATTRIBUTIONS.md).
