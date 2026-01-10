@@ -1,12 +1,13 @@
 [project]
 name = "gzpy"
 version = "0.1.0"
-description = "Add your description here"
+description = "A Python package to compute GZ curves for ship stability."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "matplotlib>=3.10.8",
     "numpy>=2.4.1",
+    "rtree>=1.4.1",
     "tqdm>=4.67.1",
     "trimesh>=4.11.0",
 ]
