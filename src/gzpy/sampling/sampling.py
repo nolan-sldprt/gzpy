@@ -59,12 +59,11 @@ def gz_curve(
         # locate waterline
         z_level = locate_waterline(transformed_points, mass, mesh.volume, density)
 
-        submerged = transformed_points[transformed_points[:, 2] <= z_level]
+        cob = center_of_buoyancy(transformed_points, z_level)
 
-        cob = center_of_buoyancy(submerged, z_level)
-
-        # TODO: this somehow needs to be signed
-        gz[i] = cob[0] - COM[0]
+        # TODO: ensure this is the correct sign usage
+        # FIXME: I think this only works if `angle` is wrapped within [-180,180) or [-pi, pi)
+        gz[i] = np.sign(angle) * (cob[0] - COM[0])
 
     return gz
 
@@ -84,6 +83,7 @@ def center_of_buoyancy(points: NDArray[np.float32], z_level: float) -> NDArray[n
     NDArray[np.float32]
         The Center of Buoyancy (COB) coordinate.
     """
+
     submerged_points = points[points[:, 2] <= z_level]
 
     cob = np.mean(submerged_points, axis=0)
@@ -107,11 +107,16 @@ def sample_volume_points(mesh: trimesh.Trimesh, n_points: int) -> NDArray[np.flo
         Array of sampled points of shape (n_points, 3).
     """
 
-    # get bounds in meters
+    # get the bounds of the mesh (m)
     bounds: list[list[float], list[float]] = mesh.bounds # [[minx, miny, minz], [maxx, maxy, maxz]]
-    points = []
+    # create an empty list to store the points
+    points: list = []
+
+    # sample the points
     with tqdm(total=n_points, desc=f'Generating {n_points} sampling points') as pbar:
         while len(points) < n_points:
+            # attempt to sample `n_points` points within the mesh
+            # trimesh often returns <`n_points` which necessitates the loop
             batch = np.random.uniform(bounds[0], bounds[1], size=(n_points, 3))
             mask = mesh.contains(batch)
             points.extend(batch[mask])
@@ -120,18 +125,18 @@ def sample_volume_points(mesh: trimesh.Trimesh, n_points: int) -> NDArray[np.flo
             pbar.n = min(len(points), n_points)
             pbar.refresh()
 
-        # crop to contain only `N` sampled points
+        # crop to contain only `n_points` sampled points
         points = np.array(points[:n_points])
 
     return points
 
-def locate_waterline(points: NDArray[np.float32], mass: float, volume: float, density: float) -> float:
+def locate_waterline(sampled_points: NDArray[np.float32], mass: float, volume: float, density: float) -> float:
     """
     Locate the waterline z-level given a set of 3D points, mass, volume, and fluid density.
 
     Parameters
     ----------
-    points : NDArray[np.float32]
+    sampled_points : NDArray[np.float32]
         Array of 3D points.
     mass : float
         Mass of the vessel (kg).
@@ -146,35 +151,32 @@ def locate_waterline(points: NDArray[np.float32], mass: float, volume: float, de
         The z-level representing the waterline.
     """
 
+    # copy the sampled points to avoid altering the original list
+    points = sampled_points.copy()
     # sort the points by increasing z-value
     points = points[np.argsort(points[:, 2])]
     
     # calculate necessary constants
     n_points = points.shape[0]
     volume_per_point = volume / n_points # (m^3 / per point)
+    v_submerged = mass / density  # (m^3)
 
-    v_submerged = mass / density  # m^3
-
-    # TODO: double check this logic
     # estimate number of submerged points needed
-    n_submerged_points = int(np.floor((mass / density) / volume_per_point))
+    n_submerged_points = int(np.floor(v_submerged / volume_per_point))
 
-    # n_underwater = int(np.floor((mass * n_points) / (density * volume)))
-
-    # get the z_level at that index
+    # get the z-levels and volumes at the index of `n_submerged_points` above and below `v_submerged`
     z_lower = points[n_submerged_points, 2]
     z_upper = points[n_submerged_points + 1, 2]
-
     v_lower = n_submerged_points * volume_per_point
     v_upper = (n_submerged_points + 1) * volume_per_point
 
-    # TODO: maybe an edge case if we are neutrally or negatively buoyant
-    # TODO: I suppose we can check that based on mass, volume, and density beforehand to deal with it
+    # TODO: maybe an edge case if we are neutrally or negatively buoyant, should check beforehand
     is_volume_valid: bool = v_lower <= v_submerged <= v_upper
     if not is_volume_valid:
         # TODO: create a more descriptive error message
         raise ValueError('Volume calculation error.')
 
+    # linearly interpolate to find the waterline
     z_level = z_lower + (v_submerged - v_lower) / (v_upper - v_lower) * (z_upper - z_lower)
 
     return z_level

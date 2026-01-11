@@ -15,11 +15,11 @@ def main():
     
     time_fig, time_ax = plt.subplots()
 
-    n_points = np.array([50, 250, 500, 1000])
     n_points = np.array([50, 100, 250, 500, 750, 1000, 1500, 2000, 3000])
     time_points_generation = np.zeros_like(n_points)
     time_gz_curve = np.zeros_like(n_points)
     sampling_gz_curves = np.zeros((n_points.shape[0], angles.shape[0]))
+    
     for i, n in enumerate(n_points):
         t_start = time.time()
         sampled_points = gzpy.sampling.sample_volume_points(mesh, n)

@@ -33,9 +33,9 @@ def plot_gz_curve(angles: NDArray[np.float32], gz: NDArray[np.float32]) -> None:
 
     # plot the GZ-curve
     plt.plot(angles, gz)
-    # set x-limits
+    # set x-limits based on the angles
     plt.xlim(angles.min(), angles.max())
-    # plot a horizontal line at zero-righting arm
+    # plot a horizontal line at zero-righting arm (m)
     plt.hlines(0, xmin=angles.min(), xmax=angles.max(), colors='k')
     # label the axes
     plt.xlabel('angle (\N{DEGREE SIGN})')

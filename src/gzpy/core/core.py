@@ -14,10 +14,10 @@ def __rotation_matrix(translation: NDArray[np.float32], roll: np.float32) -> NDA
 
     Returns
     -------
-    NDArray[np.float32]: A 4x4 transformation matrix.
+    NDArray[np.float32]
+        A 4x4 transformation matrix.
     """
 
-    # TODO: verify this implementation
     ry = roll
     rx, rz = 0, 0
     cx, sx = np.cos(rx), np.sin(rx)
