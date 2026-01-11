@@ -2,19 +2,41 @@
 
 A Python library to compute and analyze GZ curves (stability curves) for marine vessels.
 
+## Implementation
+
+```gzpy``` uses a Monte-Carlo approach to approximate the vessel's mesh using randomly sampled points within its volume. Increasing the quantity of sampled points will improve the accuracy of the computed GZ-curve at the cost of increased computational effort.
+
+
+## Usage and Example
+
+The following figures were generated using ```examples/demo.py``` for the "Fishing Boat" sample model.
+
+For the "Fishing Boat" sampled model, shown below in Blender,
+![image info](examples/fishing_boat.png)
+
+```gzpy``` computed the following sampling point approximation of the hull using 1000 points, and used them to compute the GZ-curve.
+
+![image info](examples/fishing_boat_sampled_points.png)
+![image info](examples/fishing_boat_gz_curve.png)
+
+
+## Notes
+
+```gzpy``` assumes the provided mesh is manifold, and has a defined volume. Improper meshes may produce unexpected behaviour.
+
 
 ## Conventions
 
 ### Coordinate System
 
 This package assumes right-handed coordinates and the following conventions,
-- the $x$-axis corresponds to surge (roll axis),
-- the $y$-axis corresponds to sway (pitch axis), and
+- the $x$-axis corresponds to sway (pitch axis),
+- the $y$-axis corresponds to surge (roll axis), and
 - the $z$-axis corresponds to heave (yaw axis)
 
 Because of the right-handed coordinate system,
-- $+x$ indicates moving forward,
-- $+y$ indicates moving towards port, and
+- $+x$ indicates moving starboard,
+- $+y$ indicates moving forward, and
 - $+z$ indicates increasing elevation
 
 ### Center of Mass (COM)
@@ -32,6 +54,9 @@ All arguments must be given in SI units.
 
 This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
 
+### Contributing
+
+Open-source contributions are welcome. Please report an issue or submit a pull request.
 
 ### Citation
 
