@@ -19,7 +19,7 @@ For the "Fishing Boat" sampled model, shown below in Blender,
 ![image info](examples/fishing_boat_sampled_points.png)
 ![image info](examples/fishing_boat_gz_curve.png)
 
-### Comvergence
+### Convergence
 
 As the number of sampled points increases, it asymptotically approaches the exact model of the vessel.
 Consequently, the approximated GZ-curve also approaches the exact GZ-curve as the number of sampled points approaches infinity, at the cost of increased computational effort. The following example figures for the "Fishing Boat" model demonstrate convergence of the approximated GZ-curves as the number of sampled points increases, and the increased computation time on an Intel i9 CPU with 32 GB of RAM.
@@ -27,6 +27,7 @@ Consequently, the approximated GZ-curve also approaches the exact GZ-curve as th
 ![image info](examples/converging_gz_curves.png)
 ![image info](examples/gz_curve_computation_time.png)
 
+As shown above, the majority of computation time is spent sampling points within the vessel, and relatively little time is spent computing the GZ-curve using these sampled points.
 
 ## Notes
 
