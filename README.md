@@ -35,9 +35,9 @@ As shown above, the majority of computation time is spent sampling points within
 
 ## Notes
 
-```gzpy``` assumes the provided mesh is manifold, and has a defined volume. Improper meshes may produce unexpected behaviour.
+```gzpy``` assumes the provided mesh is manifold, and has a defined volume. Improper meshes may produce inaccurate results or unexpected behaviour.
 
-The provided examples and sample data do not reflect vessels, masses, or COM locations. The meshes and values used in the examples are for demonstration only.
+The provided examples and sample data do not reflect real vessels, masses, or COM locations. The example meshes and values are for demonstration only.
 
 
 ## Conventions
