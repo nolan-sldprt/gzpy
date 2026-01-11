@@ -22,9 +22,6 @@ def main():
 
     print(f'{mesh.is_volume}')
     print(f'{mesh.is_watertight}')
-    mesh = gzpy.core.repair_mesh(mesh)
-    print(f'{mesh.is_volume}')
-    print(f'{mesh.is_watertight}')
 
     n_points: int = 1000
 
