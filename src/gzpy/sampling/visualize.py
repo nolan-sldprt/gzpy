@@ -7,14 +7,14 @@ def plot_geometry(points: NDArray[np.float32], z: float=None, COM: NDArray[np.fl
     # scatter plot in 3D
     fig = plt.figure()
     ax = fig.add_subplot(111, projection="3d")
-    ax.scatter(points[:, 0], points[:, 1], points[:, 2], s=1, c="blue")
+    ax.scatter(points[:, 0], points[:, 1], points[:, 2], s=1, c="blue", label='sampling points')
 
     if z is not None:
         x = np.array([points[:,0].min(), points[:,0].max()])
         y = np.array([points[:,1].min(), points[:,1].max()])
         X, Y = np.meshgrid(x, y)
         Z = z*np.ones_like(X)
-        ax.plot_surface(X,Y,Z, alpha=0.8, label='sampling points')
+        ax.plot_surface(X,Y,Z, alpha=0.8, label='waterline')
 
     if COM is not None:
         ax.scatter(*COM.tolist(), color='red', label='COM')

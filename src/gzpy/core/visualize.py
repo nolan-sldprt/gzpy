@@ -20,11 +20,11 @@ def plot_gz_curve(angles: NDArray, gz: NDArray) -> None:
     plt.plot(angles, gz)
     # set x-limits
     plt.xlim(angles.min(), angles.max())
-    # plot a horizontal line at zero-righting moment
+    # plot a horizontal line at zero-righting arm
     plt.hlines(0, xmin=angles.min(), xmax=angles.max(), colors='k')
     # label the axes
     plt.xlabel('angle (\N{DEGREE SIGN})')
-    plt.ylabel('righting moment (m)')
+    plt.ylabel('righting arm (m)')
 
     # show the plot to the user
     plt.show()
