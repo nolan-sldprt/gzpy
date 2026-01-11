@@ -26,14 +26,16 @@ def main():
     print(f'{mesh.is_volume}')
     print(f'{mesh.is_watertight}')
 
-    points = gzpy.sampling.sample_volume_points(mesh, 1000)
+    n_points: int = 1000
+
+    points = gzpy.sampling.sample_volume_points(mesh, n_points)
     z = gzpy.sampling.locate_waterline(points, mass, mesh.volume, gzpy.constants.DENSITY_SALTWATER)
     cob = gzpy.sampling.center_of_buoyancy(points, z)
     gzpy.sampling.plot_geometry(points, z, np.array([0,0,0]), cob)
 
     angles = np.arange(0,185,5)
-    gzCURVE = gzpy.sampling.gz_curve(mesh, 1000, mass, gzpy.constants.DENSITY_SALTWATER, np.array([0,0,-1]), angles)
-    gzpy.core.plot_gz_curve(angles, gzCURVE)
+    gz = gzpy.sampling.gz_curve(mesh, n_points, mass, gzpy.constants.DENSITY_SALTWATER, np.array([0,0,-1]), angles, points=points)
+    gzpy.core.plot_gz_curve(angles, gz)
 
 if __name__ == '__main__':
     main()
