@@ -15,12 +15,12 @@ The vessel's geometry must be supplied as a wavefront (```.obj```) file.
 The following figures were generated using ```examples/demo.py``` for the "Fishing Boat" sample model.
 
 For the "Fishing Boat" model, shown below in Blender,
+
 <img src="examples/fishing_boat.png" width="400">
 
 ```gzpy``` computed the following sampling point approximation of the hull using 1000 points, and used them to compute the GZ-curve.
 
-<img src="examples/fishing_boat_sampled_points.png" width="450">
-<img src="examples/fishing_boat_gz_curve.png" width="450">
+<img src="examples/fishing_boat_sampled_points.png" width="454"> <img src="examples/fishing_boat_gz_curve.png" width="500">
 
 ### Convergence
 
