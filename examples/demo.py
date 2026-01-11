@@ -42,10 +42,10 @@ def main():
     print(f'{mesh.is_volume}')
     print(f'{mesh.is_watertight}')
 
-    # points = gzpy.sampling.sample_volume_points(mesh, 1000)
-    # z = gzpy.sampling.locate_waterline(points, mass, mesh.volume, gzpy.constants.DENSITY_SALTWATER)
-    # cob = gzpy.sampling.center_of_buoyancy(points, z)
-    # gzpy.sampling.plot_geometry(points, z, np.array([0,0,0]), cob)
+    points = gzpy.sampling.sample_volume_points(mesh, 1000)
+    z = gzpy.sampling.locate_waterline(points, mass, mesh.volume, gzpy.constants.DENSITY_SALTWATER)
+    cob = gzpy.sampling.center_of_buoyancy(points, z)
+    gzpy.sampling.plot_geometry(points, z, np.array([0,0,0]), cob)
 
     angles = np.arange(0,185,5)
     gzCURVE = gzpy.sampling.gz_curve(mesh, 1000, mass, gzpy.constants.DENSITY_SALTWATER, np.array([0,0,-1]), angles)
