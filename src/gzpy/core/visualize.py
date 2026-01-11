@@ -32,14 +32,16 @@ def plot_gz_curve(angles: NDArray[np.float32], gz: NDArray[np.float32]) -> None:
     plt.figure()
 
     # plot the GZ-curve
-    plt.plot(angles, gz)
+    plt.plot(angles, gz, label='GZ-curve')
     # set x-limits based on the angles
     plt.xlim(angles.min(), angles.max())
     # plot a horizontal line at zero-righting arm (m)
-    plt.hlines(0, xmin=angles.min(), xmax=angles.max(), colors='k')
+    plt.hlines(0, xmin=angles.min(), xmax=angles.max(), colors='k', label='zero-righting arm')
     # label the axes
     plt.xlabel('angle (\N{DEGREE SIGN})')
     plt.ylabel('righting arm (m)')
+    # plot a legend
+    plt.legend(draggable=True)
 
     # show the plot to the user
     plt.show()
