@@ -3,13 +3,17 @@ from numpy.typing import NDArray
 
 def __rotation_matrix(translation: NDArray[np.float32], angle: NDArray[np.float32]) -> NDArray[np.float32]:
     """
-    Create a 4x4 transformation matrix for given translation and Euler angles.
+    Create a 4x4 transformation matrix for given translation and roll angle.
 
-    Parameters:
-        translation (np.ndarray): A 3-element array representing translation in x, y, z.
-        angles (np.ndarray): A 3-element array representing Euler angles (roll, pitch, yaw) in radians.
+    Parameters
+    ----------
+        translation : NDArray[np.float32]
+            A 3-element array representing translation in x, y, z.
+        angle : NDArray[np.float32]
+            A 3-element array representing Euler angles (roll, pitch, yaw) in radians. # TODO: correct this
 
-    Returns:
+    Returns
+    -------
         np.ndarray: A 4x4 transformation matrix.
     """
     # TODO: verify this implementation

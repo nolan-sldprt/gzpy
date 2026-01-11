@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 from numpy.typing import NDArray
 import trimesh
@@ -13,9 +12,35 @@ def gz_curve(
         density: float,
         COM: NDArray[np.float32],
         angles: NDArray[np.float32],
-        points: NDArray[np.float32]=None
+        points: NDArray[np.float32] | None = None
     ) -> NDArray[np.float32]:
-    
+    """
+    Generate the GZ-curve for a 
+
+    Parameters
+    ----------
+        mesh : trimesh.Trimesh
+            The mesh of the vessel.
+        n_points : int
+            Number of sampling points to compute.
+        mass : float
+            Mass of the vessel.
+        density : float
+            Density of the fluid the vessel is in.
+        COM : NDArray[np.float32]
+            3D location of the vessel's Center of Mass.
+        angles : NDArray[np.float32]
+            Array of angles for which to compute the righting moment.
+        points : NDArray[np.float32] or None, optional
+            The sampled points of the mesh. If provided, the `mesh` and `n_points` arguments
+            are ignored.
+
+    Returns
+    -------
+    NDArray[np.float32]
+        Array of the vessel's righting arm (in metres) corresponding to the supplied `angles`.
+    """
+
     # convert angles from degrees to radians
     angles = np.radians(angles)
 
@@ -36,8 +61,6 @@ def gz_curve(
         submerged = transformed_points[transformed_points[:, 2] <= z_level]
 
         cob = center_of_buoyancy(submerged, z_level)
-
-        # test_plotting(transformed_points, z_level)
 
         # TODO: this somehow needs to be signed
         gz[i] = cob[0] - COM[0]
@@ -61,10 +84,7 @@ def center_of_buoyancy(points: NDArray[np.float32], z_level: float) -> NDArray[n
 
     return cob
 
-def sample_volume_points(
-        mesh: trimesh.Trimesh,
-        n_points: int,
-    ) -> NDArray[np.float32]:
+def sample_volume_points(mesh: trimesh.Trimesh, n_points: int) -> NDArray[np.float32]:
     """
     Sample points uniformly from the volume of a 3D mesh
 
@@ -104,14 +124,21 @@ def locate_waterline(points: NDArray[np.float32], mass: float, volume: float, de
     """
     Locate the waterline z-level given a set of 3D points, mass, volume, and fluid density.
 
-    Parameters:
-        points (np.ndarray): An Nx3 array of 3D points.
-        mass (float): The mass of the object in kg.
-        volume (float): The volume of the object in m^3.
-        density (float): The density of the fluid in kg/m^3.
+    Parameters
+    ----------
+        points : NDArray[np.float32]
+            Array of 3D points.
+        mass : float
+            Mass of the vessel (kg).
+        volume : float
+            Volue of the vessel (m^3).
+        density : float
+            Density of the fluid (kg/m^3).
     
-    Returns:
-        float: The z-level representing the waterline.
+    Returns
+    -------
+        float
+            The z-level representing the waterline.
     """
 
     # sort the points by increasing z-value
@@ -127,7 +154,7 @@ def locate_waterline(points: NDArray[np.float32], mass: float, volume: float, de
     # estimate number of submerged points needed
     n_submerged_points = int(np.floor((mass / density) / volume_per_point))
 
-    n_underwater = int(np.floor((mass * n_points) / (density * volume)))
+    # n_underwater = int(np.floor((mass * n_points) / (density * volume)))
 
     # get the z_level at that index
     z_lower = points[n_submerged_points, 2]
@@ -136,10 +163,12 @@ def locate_waterline(points: NDArray[np.float32], mass: float, volume: float, de
     v_lower = n_submerged_points * volume_per_point
     v_upper = (n_submerged_points + 1) * volume_per_point
 
-    # TODO: can you do an assertion like this? this should likely be a raised error if it fails
     # TODO: maybe an edge case if we are neutrally or negatively buoyant
     # TODO: I suppose we can check that based on mass, volume, and density beforehand to deal with it
-    assert v_lower <= v_submerged <= v_upper
+    is_volume_valid: bool = v_lower <= v_submerged <= v_upper
+    if not is_volume_valid:
+        # TODO: create a more descriptive error message
+        raise ValueError('Volume calculation error.')
 
     z_level = z_lower + (v_submerged - v_lower) / (v_upper - v_lower) * (z_upper - z_lower)
 
