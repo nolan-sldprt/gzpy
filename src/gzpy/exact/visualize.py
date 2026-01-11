@@ -1,0 +1,50 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from numpy.typing import NDArray
+import trimesh
+
+from gzpy.core.mesh import repair_mesh
+
+def plot_geometry(mesh: trimesh.Trimesh, z: float=None, COM: NDArray[np.float32]=None, COB: NDArray[np.float32]=None) -> None:
+
+    new_mesh = repair_mesh(mesh)
+    
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot_trisurf(
+        new_mesh.vertices[:, 0],
+        new_mesh.vertices[:, 1],
+        new_mesh.vertices[:, 2],
+        triangles=new_mesh.faces,
+        label='mesh'
+    )
+
+    if COM is not None:
+        ax.scatter(*COM.tolist(), color='red', label='COM')
+    
+    if COB is not None:
+        ax.scatter(*COB.tolist(), color='green', label='COB')
+
+    # get the limits of the axes
+    limits = np.array([
+        ax.get_xlim3d(),
+        ax.get_ylim3d(),
+        ax.get_zlim3d()
+    ])
+    spans = limits[:,1] - limits[:,0]
+    centers = np.mean(limits, axis=1)
+    radius = 0.5 * max(spans)
+    # set the axes to have equal scales
+    ax.set_xlim3d(centers[0] - radius, centers[0] + radius)
+    ax.set_ylim3d(centers[1] - radius, centers[1] + radius)
+    ax.set_zlim3d(centers[2] - radius, centers[2] + radius)
+
+    # label the axes
+    ax.set_xlabel("$x$ (m)")
+    ax.set_ylabel("$y$ (m)")
+    ax.set_zlabel("$z$ (m)")
+
+    plt.legend(draggable=True)
+
+    # show the plot to the user
+    plt.show()
