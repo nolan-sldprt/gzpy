@@ -7,7 +7,7 @@ A Python library to compute and analyze GZ curves (stability curves) for marine 
 ```gzpy``` uses a Monte-Carlo approach to approximate the vessel's mesh using randomly sampled points within its volume. Increasing the quantity of sampled points will improve the accuracy of the computed GZ-curve at the cost of increased computational effort.
 
 
-## Usage and Example
+## Usage and Examples
 
 The following figures were generated using ```examples/demo.py``` for the "Fishing Boat" sample model.
 
@@ -18,6 +18,14 @@ For the "Fishing Boat" sampled model, shown below in Blender,
 
 ![image info](examples/fishing_boat_sampled_points.png)
 ![image info](examples/fishing_boat_gz_curve.png)
+
+### Comvergence
+
+As the number of sampled points increases, it asymptotically approaches the exact model of the vessel.
+Consequently, the approximated GZ-curve also approaches the exact GZ-curve as the number of sampled points approaches infinity, at the cost of increased computational effort. The following example figures for the "Fishing Boat" model demonstrate convergence of the approximated GZ-curves as the number of sampled points increases, and the increased computation time on an Intel i9 CPU with 32 GB of RAM.
+
+![image info](examples/converging_gz_curves.png)
+![image info](examples/gz_curve_computation_time.png)
 
 
 ## Notes
