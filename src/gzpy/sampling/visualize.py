@@ -3,6 +3,29 @@ import numpy as np
 from numpy.typing import NDArray
 
 def plot_geometry(points: NDArray[np.float32], z: float=None, COM: NDArray[np.float32]=None, COB: NDArray[np.float32]=None) -> None:
+    """
+    Plot the sampled points that approximate a vessel.
+
+    If provided, the: waterline, COM, and COB can also be plotted.
+
+    Parameters
+    ----------
+    points : NDArray[np.float32]
+        Array of sampled points within a vessel.
+    z : float or None, optional
+        Height of the waterline.
+        Defaults to `None`.
+    COM : NDArray[np.float32] or None, optional
+        3D coordinate of the Center of Mass.
+        Defaults to `None`.
+    COB : NDArray[np.float32] or None, optional
+        3D coordinate of the Center of Buoyancy.
+        Defaults to `None`.
+
+    Returns
+    -------
+    None
+    """
 
     # scatter plot in 3D
     fig = plt.figure()

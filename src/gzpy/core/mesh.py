@@ -2,6 +2,20 @@ import numpy as np
 import trimesh
 
 def load_mesh(file: str) -> trimesh.Trimesh:
+    """
+    Load a mesh from a file.
+
+    Parameters
+    ----------
+    file : str
+        The location of the file to be loaded.
+    
+    Returns
+    -------
+    trimesh.Trimesh
+        The mesh loaded from the file.
+    """
+
     mesh = trimesh.load(file)
 
     if not isinstance(mesh, trimesh.Trimesh):

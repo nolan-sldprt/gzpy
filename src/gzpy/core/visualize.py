@@ -1,7 +1,22 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from numpy.typing import NDArray
 
-def plot_gz_curve(angles: NDArray, gz: NDArray) -> None:
+def plot_gz_curve(angles: NDArray[np.float32], gz: NDArray[np.float32]) -> None:
+    """
+    Plot the GZ-curve.
+
+    Parameters
+    ----------
+    angles :  NDArray[np.float32]
+        Array of angles to plot.
+    gz : NDArray[np.float32]
+        Array of righting arms (m), corresponding the the `angles`.
+    
+    Returns
+    -------
+    None
+    """
 
     # validate the input data
     if len(angles.shape) > 1:

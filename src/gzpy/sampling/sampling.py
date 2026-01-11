@@ -15,25 +15,26 @@ def gz_curve(
         points: NDArray[np.float32] | None = None
     ) -> NDArray[np.float32]:
     """
-    Generate the GZ-curve for a 
+    Generate the GZ-curve for a vessel's mesh.
 
     Parameters
     ----------
-        mesh : trimesh.Trimesh
-            The mesh of the vessel.
-        n_points : int
-            Number of sampling points to compute.
-        mass : float
-            Mass of the vessel.
-        density : float
-            Density of the fluid the vessel is in.
-        COM : NDArray[np.float32]
-            3D location of the vessel's Center of Mass.
-        angles : NDArray[np.float32]
-            Array of angles for which to compute the righting moment.
-        points : NDArray[np.float32] or None, optional
-            The sampled points of the mesh. If provided, the `mesh` and `n_points` arguments
-            are ignored.
+    mesh : trimesh.Trimesh
+        The mesh of the vessel.
+    n_points : int
+        Number of sampling points to compute.
+    mass : float
+        Mass of the vessel.
+    density : float
+        Density of the fluid the vessel is in.
+    COM : NDArray[np.float32]
+        3D location of the vessel's Center of Mass.
+    angles : NDArray[np.float32]
+        Array of angles for which to compute the righting moment.
+    points : NDArray[np.float32] or None, optional
+        The sampled points of the mesh. If provided, the `mesh` and `n_points` arguments
+        are ignored.
+        Defaults to `None`.
 
     Returns
     -------
@@ -71,12 +72,17 @@ def center_of_buoyancy(points: NDArray[np.float32], z_level: float) -> NDArray[n
     """
     Compute the center of buoyancy (COB) for a set of submerged 3D points.
 
-    Parameters:
-        points (np.ndarray): An Nx3 array of 3D points.
-        z_level (float): The z-level representing the waterline.
+    Parameters
+    ----------
+    points : NDArray[np.float32]
+        Array of sampled 3D points.
+    z_level : float
+        The z-level representing the waterline.
 
-    Returns:
-        np.ndarray: A 3-element array representing the COB coordinates.
+    Returns
+    -------
+    NDArray[np.float32]
+        The Center of Buoyancy (COB) coordinate.
     """
     submerged_points = points[points[:, 2] <= z_level]
 
@@ -86,22 +92,20 @@ def center_of_buoyancy(points: NDArray[np.float32], z_level: float) -> NDArray[n
 
 def sample_volume_points(mesh: trimesh.Trimesh, n_points: int) -> NDArray[np.float32]:
     """
-    Sample points uniformly from the volume of a 3D mesh
+    Sample points uniformly from the volume of a 3D mesh.
 
-    Parameters:
-        mesh (trimesh.Trimesh): The input 3D mesh.
-        n_points (int): The number of points to sample.
+    Parameters
+    ----------
+    mesh : trimesh.Trimesh
+        The mesh to sample.
+    n_points : int
+        Number of points to sample within the mesh.
 
-    Returns:
-        NDArray[np.float32] An array of sampled points of shape (n_points, 3).
+    Returns
+    -------
+    NDArray[np.float32]
+        Array of sampled points of shape (n_points, 3).
     """
-    # print(mesh.is_watertight)
-    # print(mesh.volume)
-    # mesh.fill_holes()
-    # print(mesh.is_watertight)
-    # print(mesh.volume)
-
-    # points = trimesh.sample.volume_mesh(mesh, n_points)
 
     # get bounds in meters
     bounds: list[list[float], list[float]] = mesh.bounds # [[minx, miny, minz], [maxx, maxy, maxz]]
@@ -115,6 +119,7 @@ def sample_volume_points(mesh: trimesh.Trimesh, n_points: int) -> NDArray[np.flo
             # update the progress bar
             pbar.n = min(len(points), n_points)
             pbar.refresh()
+
         # crop to contain only `N` sampled points
         points = np.array(points[:n_points])
 
@@ -126,19 +131,19 @@ def locate_waterline(points: NDArray[np.float32], mass: float, volume: float, de
 
     Parameters
     ----------
-        points : NDArray[np.float32]
-            Array of 3D points.
-        mass : float
-            Mass of the vessel (kg).
-        volume : float
-            Volue of the vessel (m^3).
-        density : float
-            Density of the fluid (kg/m^3).
+    points : NDArray[np.float32]
+        Array of 3D points.
+    mass : float
+        Mass of the vessel (kg).
+    volume : float
+        Volue of the vessel (m^3).
+    density : float
+        Density of the fluid (kg/m^3).
     
     Returns
     -------
-        float
-            The z-level representing the waterline.
+    float
+        The z-level representing the waterline.
     """
 
     # sort the points by increasing z-value
