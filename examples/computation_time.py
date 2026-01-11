@@ -11,6 +11,8 @@ def main():
     angles = np.arange(0,185,5)
 
     gz_curve_fig, gz_curve_ax = plt.subplots()
+    gz_curve_ax.hlines(0, angles.min(), angles.max(), color='k', label='waterline')
+    
     time_fig, time_ax = plt.subplots()
 
     n_points = np.array([50, 250, 500, 1000])
