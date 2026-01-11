@@ -1,0 +1,56 @@
+# Blender 5.0.1 MTL File: 'MergedFull.blend'
+# www.blender.org
+
+newmtl BoatFBXSoften_BoatTex_BaseColor_Mat
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/nolan/dev/gzpy/examples/sample_data/Textures/Boat/UE5/BoatFBXSoften_BoatTex_BaseColor.tga
+map_Bump -bm 1.000000 /home/nolan/dev/gzpy/examples/sample_data/Textures/Boat/UE5/BoatFBXSoften_BoatTex_Normal.tga
+
+newmtl NOTShiny
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/nolan/dev/gzpy/examples/sample_data/Textures/OtherParts/UE5/PartsFBXSoften1_lambert1_BaseColor.tga
+map_Bump -bm 1.000000 /home/nolan/dev/gzpy/examples/sample_data/Textures/OtherParts/UE5/PartsFBXSoften1_lambert1_Normal.tga
+
+newmtl Shiny
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/nolan/dev/gzpy/examples/sample_data/Textures/OtherParts/UE5/PartsFBXSoften1_lambert1_BaseColor.tga
+map_Bump -bm 1.000000 /home/nolan/dev/gzpy/examples/sample_data/Textures/OtherParts/UE5/PartsFBXSoften1_lambert1_Normal.tga
+
+newmtl ToSubstance_lambert5_BaseColor_Mat
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/nolan/dev/gzpy/examples/sample_data/Textures/Signs/UE5/ToSubstance_lambert5_BaseColor.tga
+map_Bump -bm 1.000000 /home/nolan/dev/gzpy/examples/sample_data/Textures/Signs/UE5/ToSubstance_lambert5_Normal.tga
+
+newmtl WorldGridMaterial
+Ns 200.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.215861 0.215861 0.215861
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
