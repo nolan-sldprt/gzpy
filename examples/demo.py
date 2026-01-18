@@ -29,9 +29,9 @@ def main():
     cob = gzpy.sampling.center_of_buoyancy(points, z)
     gzpy.sampling.plot_geometry(points, z, np.array([0,0,0]), cob)
 
-    angles = np.arange(0,185,5)
+    angles = np.arange(0,181,1)
     gz = gzpy.sampling.gz_curve(mesh, n_points, mass, gzpy.constants.DENSITY_SALTWATER, np.array([0,0,-1]), angles, points=points)
-    gzpy.core.plot_gz_curve(angles, gz)
+    gzpy.core.plot_gz_curve(angles, gz, show=True)
 
 if __name__ == '__main__':
     main()
