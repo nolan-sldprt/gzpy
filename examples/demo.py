@@ -20,8 +20,7 @@ def main():
         case _:
             raise ValueError("Input mesh choice is not available option. Must be [1,2].")
 
-    print(f'{mesh.is_volume}')
-    print(f'{mesh.is_watertight}')
+    print(f"Watertight and Volume: ({gzpy.core.validate_mesh(mesh)})")
 
     n_points: int = 1000
 

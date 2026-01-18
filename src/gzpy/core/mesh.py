@@ -32,3 +32,22 @@ def load_mesh(file: str) -> trimesh.Trimesh:
     mesh.apply_transform(T)
 
     return mesh
+
+def validate_mesh(mesh: trimesh.Trimesh) -> None:
+    """
+    Validate a mesh to ensure it is suitable for hydrostatic analysis.
+
+    Parameters
+    ----------
+    mesh : trimesh.Trimesh
+        The mesh to validate.
+    
+    Returns
+    -------
+        bool
+            Mesh watertight status. True if the mesh is watertight, and False otherwise.
+        bool
+            Mesh volume status. True if the mesh is a volume, and False otherwise.
+    """
+
+    return mesh.is_volume and mesh.is_watertight
