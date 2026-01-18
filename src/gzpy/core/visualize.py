@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numpy.typing import NDArray
 
-def plot_gz_curve(angles: NDArray[np.float32], gz: NDArray[np.float32]) -> None:
+def plot_gz_curve(angles: NDArray[np.float32], gz: NDArray[np.float32], show: bool=False) -> None:
     """
     Plot the GZ-curve.
 
@@ -12,6 +12,9 @@ def plot_gz_curve(angles: NDArray[np.float32], gz: NDArray[np.float32]) -> None:
         Array of angles to plot.
     gz : NDArray[np.float32]
         Array of righting arms (m), corresponding the the `angles`.
+    show : bool, optional
+        Whether to show the plot immediately.
+        Defaults to `False`.
     
     Returns
     -------
@@ -44,4 +47,5 @@ def plot_gz_curve(angles: NDArray[np.float32], gz: NDArray[np.float32]) -> None:
     plt.legend(draggable=True)
 
     # show the plot to the user
-    plt.show()
+    if show:
+        plt.show()

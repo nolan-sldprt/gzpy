@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numpy.typing import NDArray
 
-def plot_geometry(points: NDArray[np.float32], z: float=None, COM: NDArray[np.float32]=None, COB: NDArray[np.float32]=None) -> None:
+def plot_geometry(points: NDArray[np.float32], z: float=None, COM: NDArray[np.float32]=None, COB: NDArray[np.float32]=None, show: bool=False) -> None:
     """
     Plot the sampled points that approximate a vessel.
 
@@ -21,6 +21,9 @@ def plot_geometry(points: NDArray[np.float32], z: float=None, COM: NDArray[np.fl
     COB : NDArray[np.float32] or None, optional
         3D coordinate of the Center of Buoyancy.
         Defaults to `None`.
+    show : bool, optional
+        Whether to show the plot immediately.
+        Defaults to `False`.
 
     Returns
     -------
@@ -72,4 +75,5 @@ def plot_geometry(points: NDArray[np.float32], z: float=None, COM: NDArray[np.fl
     plt.legend(draggable=True)
 
     # show the plot to the user
-    plt.show()
+    if show:
+        plt.show()
